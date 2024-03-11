@@ -31,9 +31,8 @@ module.exports = {
   },
 
   getAdminDataDetails: (callBack) => {
-
     try {
-      pool.query(`select * from marketData where createAt = current_date and deleteflag=0 order by market_data_id desc`, (err, result) => {
+      pool.query(`select market_data_id,name,comments,status,correction,firstname,md.phoneno,md.gender from marketData md join usermaster um on md.user_id =um.user_id and md.createAt = current_date and md.deleteflag=0 order by market_data_id desc`, (err, result) => {
         if (err) return callBack(err);
         return callBack(null, result);
       })

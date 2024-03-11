@@ -22,7 +22,4 @@ router.get('/getUserPasswordById/:user_id',checkToken,getUserpasswordById);
 router.put('/updatePersonalDetailById',checkToken,updatePersonalDetailById);
 router.patch('/updateAdminPasswordById',checkToken,updateAdminPasswordById);
 
-router.get('/checkToken',checkToken);
-
-
 module.exports = router;
