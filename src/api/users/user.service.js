@@ -7,7 +7,7 @@ module.exports = {
         if (err) callBack(err)
         // if (result) {
         let counts = result[0].count
-        let gsrID = `gsr-${counts + 1}`
+        let gsrID = `nc-${counts + 1}`
         pool.query(`select email from usermaster where email=? and deleteflag=0`, [data.email], (err, result) => {
           if (err) callBack(err)
           if (result.length === 0) {
@@ -66,9 +66,8 @@ module.exports = {
 
   },
   getUsersDetails: (callBack) => {
-
     try {
-      pool.query(`select  user_id,firstname,roleType,createAt,email,password from usermaster where deleteflag=0 and roletype !=0  ORDER BY p_id DESC `, (err, result) => {
+      pool.query(`select  user_id,firstname,roleType,createAt,email,password from usermaster where deleteflag=0 and roletype!=0  ORDER BY p_id DESC `, (err, result) => {
         if (err) return callBack(err);
         return callBack(null, result);
       })
@@ -155,5 +154,18 @@ module.exports = {
     catch(error){
       return callback(error);
     }
-  }
+  },
+  getAllAccountant:(callback)=>{
+    try{
+      pool.query(`select * from usermaster where roletype = 2`,(err,result)=>{
+        if(err){
+          return callback(err)
+        }
+        return callback(null,result);
+      })
+    }
+    catch(error){
+      return callback(error)
+    }
+  },
 };

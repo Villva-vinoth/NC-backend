@@ -1,4 +1,4 @@
-const { createProjectTransaction, getAdminProjectTransactionDetails, getAccountProjectTransactionDetails, updateAdminProjectTransactionApproveDetailById, getCreditProjectTransactionDetails, getDebitProjectTransactionDetails } = require("./projectTransaction.service");
+const { createProjectTransaction, getAdminProjectTransactionDetails, getAccountProjectTransactionDetails, updateAdminProjectTransactionApproveDetailById, getCreditProjectTransactionDetails, getDebitProjectTransactionDetails, getDebitAndCreditDetails, getAdminProjectDetails } = require("./projectTransaction.service");
 
 module.exports = {
   createProjectTransaction: (req, res) => {
@@ -22,7 +22,7 @@ module.exports = {
   },
   getAdminProjectTransactionDetails: (req, res) => {
     const body = req.params
-    getAdminProjectTransactionDetails(body,(err, result) => {
+    getAdminProjectTransactionDetails(body, (err, result) => {
       if (err)
         return res.status(500).json({
           success: 0,
@@ -35,8 +35,8 @@ module.exports = {
     })
   },
   getAccountProjectTransactionDetails: (req, res) => {
-    const body =req.params
-    getAccountProjectTransactionDetails(body,(err, result) => {
+    const body = req.params
+    getAccountProjectTransactionDetails(body, (err, result) => {
       if (err)
         return res.status(500).json({
           success: 0,
@@ -48,7 +48,7 @@ module.exports = {
       })
     })
   },
- 
+
   updateAdminProjectTransactionApproveDetailById: (req, res) => {
     const body = req.body;
     updateAdminProjectTransactionApproveDetailById(body, (err, result) => {
@@ -60,7 +60,7 @@ module.exports = {
       }
       return res.status(200).json({
         success: 1,
-        message:"Updated Successfully!"
+        message: "Updated Successfully!"
       })
     })
   },
@@ -80,8 +80,8 @@ module.exports = {
     })
   },
   getCreditProjectTransactionDetails: (req, res) => {
-    const body =req.params
-    getCreditProjectTransactionDetails(body,(err, result) => {
+    const body = req.params
+    getCreditProjectTransactionDetails(body, (err, result) => {
       if (err)
         return res.status(500).json({
           success: 0,
@@ -94,8 +94,8 @@ module.exports = {
     })
   },
   getDebitProjectTransactionDetails: (req, res) => {
-    const body =req.params
-    getDebitProjectTransactionDetails(body,(err, result) => {
+    const body = req.params
+    getDebitProjectTransactionDetails(body, (err, result) => {
       if (err)
         return res.status(500).json({
           success: 0,
@@ -107,6 +107,37 @@ module.exports = {
       })
     })
   },
+  getDebitAndCreditDetails: (req, res) => {
+    const body = req.params;
+    getDebitAndCreditDetails(body, (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          success: 0,
+          message: "Database Connection Error"
+        })
+      }
+      return res.status(200).json({
+        success: 1,
+        data: result
+      })
+    })
+
+  },
+  getAdminProjectDetails: (req, res) => {
+    getAdminProjectDetails((err, result) => {
+      if (err) {
+        return res.status(500).json({
+          success: 0,
+          message: "Database Connection Error"
+        })
+      }
+      return res.status(200).json({
+        success: 1,
+        data: result
+      })
+    })
+
+  }
 
 
 };

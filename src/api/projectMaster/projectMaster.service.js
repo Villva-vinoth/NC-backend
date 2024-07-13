@@ -5,13 +5,14 @@ module.exports = {
     try {
 
       pool.query(
-        `insert into projectmaster(user_id,project_title, project_site_location,project_details) 
-                          values(?,?,?,?)`,
+        `insert into projectmaster(user_id,project_title, project_site_location,project_details,project_estimation) 
+                          values(?,?,?,?,?)`,
         [
           data.user_id,
           data.project_title,
           data.project_site_location,
           data.project_details,
+          data.project_estimation,
         ],
         (error, results, fields) => {
           if (error) {
@@ -40,10 +41,11 @@ module.exports = {
   },
   updateProjectDataDetailById: (data, callBack) => {
     try {
-      pool.query(`update projectMaster set project_title=?,project_site_location=?,project_details=? where project_id =?`,
+      pool.query(`update projectMaster set project_title=?,project_site_location=?,project_details=?,project_estimation=? where project_id =?`,
        [data.project_title,
       data.project_site_location,
       data.project_details,
+      data.project_estimation,
       data.project_id], (err, result) => {
         if (err) return callBack(err);
         return callBack(null, result);

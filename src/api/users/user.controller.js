@@ -7,7 +7,8 @@ const {
   deleteUserDetailById,
   getUserpasswordById,
   updatePersonalDetailById,
-  updateAdminPasswordById
+  updateAdminPasswordById,
+  getAllAccountant
 
 } = require("./user.service");
 const bcrypt = require("bcrypt");
@@ -135,7 +136,8 @@ module.exports = {
         data: result
       })
     })
-  }, getUserpasswordById: (req, res) => {
+  },
+   getUserpasswordById: (req, res) => {
     const body =req.params
     getUserpasswordById(body, (err, result) => {
       if (err)
@@ -177,6 +179,19 @@ module.exports = {
       return res.status(200).json({
         success:1,
         data:result
+      })
+    })
+  },
+  getAllAccountant: (req, res) => {
+    getAllAccountant((err, result) => {
+      if (err)
+        return res.status(500).json({
+          success: 0,
+          message: "Database Connection Error"
+        })
+      return res.status(200).json({
+        success: 1,
+        data: result
       })
     })
   },

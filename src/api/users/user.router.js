@@ -9,7 +9,8 @@ const {
   deleteUserDetailById,
   getUserpasswordById,
   updatePersonalDetailById,
-  updateAdminPasswordById
+  updateAdminPasswordById,
+  getAllAccountant
 } = require("./user.controller");
 
 router.post("/register", createUser);
@@ -21,5 +22,6 @@ router.patch('/deleteUserDetailById/:user_id',checkToken,deleteUserDetailById);
 router.get('/getUserPasswordById/:user_id',checkToken,getUserpasswordById);
 router.put('/updatePersonalDetailById',checkToken,updatePersonalDetailById);
 router.patch('/updateAdminPasswordById',checkToken,updateAdminPasswordById);
+router.get('/getAllAccountant',checkToken,getAllAccountant);
 
 module.exports = router;
